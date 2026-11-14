@@ -14,7 +14,7 @@ export function ContactSection({ heading = true }: { heading?: boolean }) {
   const isRealEmail = !/votre-domaine|your-domain|example\./i.test(email);
 
   const items: { Icon: LucideIcon; label: string; value: string; href?: string; ltr?: boolean }[] = [
-    { Icon: Phone, label: t('contact.phone'), value: phone, href: isReal(phone) ? `tel:${digits(phone)}` : undefined, ltr: true },
+    ...phone.split('/').map((n) => n.trim()).filter(Boolean).map((n) => ({ Icon: Phone, label: t('contact.phone'), value: n, href: isReal(n) ? `tel:${digits(n)}` : undefined, ltr: true })),
     { Icon: MessageCircle, label: t('contact.whatsapp'), value: wa, href: isReal(wa) ? `https://wa.me/${digits(wa).replace('+', '')}` : undefined, ltr: true },
     { Icon: Mail, label: t('contact.email'), value: email, href: isRealEmail ? `mailto:${email}` : undefined, ltr: true },
     { Icon: MapPin, label: t('contact.address'), value: t('contact.addressValue') },
@@ -41,7 +41,7 @@ export function ContactSection({ heading = true }: { heading?: boolean }) {
                   </>
                 );
                 return (
-                  <li key={label} className="bg-white">
+                  <li key={label + value} className="bg-white">
                     {href ? (
                       <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="group flex items-center gap-5 p-6 hover:bg-mist">{body}</a>
                     ) : (
