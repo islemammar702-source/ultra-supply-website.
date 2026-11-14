@@ -158,7 +158,7 @@ export const ar: Dict = {
   'contact.address': 'العنوان',
   'contact.phoneValue': '+216 XX XXX XXX',
   'contact.whatsappValue': '+216 XX XXX XXX',
-  'contact.emailValue': 'contact@your-domain.tn',
+  'contact.emailValue': 'ultrasupply.tn@gmail.com',
   'contact.addressValue': 'العنوان سيُحدَّد لاحقًا، تونس',
   'contact.mapQuery': 'Tunisia',
   'contact.formTitle': 'أرسل لنا رسالة',

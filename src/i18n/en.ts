@@ -158,7 +158,7 @@ export const en: Dict = {
   'contact.address': 'Address',
   'contact.phoneValue': '+216 XX XXX XXX',
   'contact.whatsappValue': '+216 XX XXX XXX',
-  'contact.emailValue': 'contact@your-domain.tn',
+  'contact.emailValue': 'ultrasupply.tn@gmail.com',
   'contact.addressValue': 'Address to be provided, Tunisia',
   'contact.mapQuery': 'Tunisia',
   'contact.formTitle': 'Send us a message',

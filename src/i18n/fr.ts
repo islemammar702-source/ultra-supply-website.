@@ -171,7 +171,7 @@ export const fr = {
   'contact.address': 'Adresse',
   'contact.phoneValue': '+216 XX XXX XXX',
   'contact.whatsappValue': '+216 XX XXX XXX',
-  'contact.emailValue': 'contact@votre-domaine.tn',
+  'contact.emailValue': 'ultrasupply.tn@gmail.com',
   'contact.addressValue': 'Adresse à communiquer, Tunisie',
   'contact.mapQuery': 'Tunisie',
   'contact.formTitle': 'Envoyez-nous un message',
