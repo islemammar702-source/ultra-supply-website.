@@ -2,6 +2,7 @@ import { supabase } from './supabase';
 import type {
   Category, ContactInput, ContactMessage, ContentRow, Partner, Product, QuoteInput, QuoteRequest, QuoteStatus,
 } from './types';
+import { notifyContact, notifyQuote } from './notify';
 import { seedCategories, seedPartners, seedProducts } from '@/data/seed';
 
 export interface AdminSession { email: string }
@@ -393,4 +394,21 @@ function demoApi(): Api {
   };
 }
 
-export const api: Api = supabase ? supabaseApi(supabase) : demoApi();
+const base: Api = supabase ? supabaseApi(supabase) : demoApi();
+
+// Every quote request and contact message is also e-mailed (see notify.ts).
+// In demo mode the e-mail is the only way the owner receives it, so a failure is reported to the visitor;
+// with Supabase the submission is already stored, so the e-mail is best-effort.
+export const api: Api = {
+  ...base,
+  async submitQuote(input, file) {
+    await base.submitQuote(input, file);
+    const sent = notifyQuote(input, file);
+    if (base.mode === 'demo') await sent; else sent.catch(() => {});
+  },
+  async submitContact(input) {
+    await base.submitContact(input);
+    const sent = notifyContact(input);
+    if (base.mode === 'demo') await sent; else sent.catch(() => {});
+  },
+};
