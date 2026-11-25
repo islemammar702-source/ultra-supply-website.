@@ -66,15 +66,19 @@ export interface QuoteRequest extends QuoteInput {
   created_at: string;
 }
 
+export type ContactRequestType = 'contact' | 'product_inquiry' | 'availability' | 'partnership';
+
 export interface ContactInput {
   full_name: string;
   email: string;
   phone: string;
   subject: string;
   message: string;
+  /** Kind of request (ERP inbox). Defaults to "contact". */
+  request_type?: ContactRequestType;
 }
 
-export interface ContactMessage extends ContactInput {
+export interface ContactMessage extends Omit<ContactInput, 'request_type'> {
   id: string;
   is_read: boolean;
   created_at: string;

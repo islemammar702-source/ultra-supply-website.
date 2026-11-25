@@ -47,6 +47,10 @@ export const uid = () =>
     ? crypto.randomUUID()
     : 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, () => ((Math.random() * 16) | 0).toString(16));
 
+/** True when the ERP migrations have not been applied yet (table/function missing). */
+const missingTable = (e: { code?: string; message: string }) =>
+  ['42P01', '42883', 'PGRST202', 'PGRST205'].includes(e.code ?? '') || /does not exist|could not find/i.test(e.message);
+
 const safeName = (name: string) =>
   name.normalize('NFKD').replace(/[^\w.-]+/g, '-').replace(/-+/g, '-').slice(-80).toLowerCase();
 
@@ -90,11 +94,27 @@ function supabaseApi(sb: NonNullable<typeof supabase>): Api {
         check(await sb.storage.from('quote-attachments').upload(path, file, { contentType: file.type }));
         attachment_path = path;
       }
-      // No .select() — visitors are not allowed to read quote rows back (RLS).
-      check(await sb.from('quote_requests').insert({ ...input, attachment_path, status: 'new' }));
+      // Unified website-request inbox (ERP). No .select(): visitors may not read rows back (RLS).
+      const res = await sb.from('contact_requests').insert({
+        request_type: 'quote', full_name: input.full_name, company: input.company, email: input.email, phone: input.phone,
+        subject: `Demande de devis : ${input.product}`.slice(0, 200), message: input.message, product: input.product,
+        reference: input.reference, quantity: input.quantity, attachment_path, locale: input.locale,
+      });
+      if (res.error && missingTable(res.error)) {
+        // ERP migrations not applied yet: keep using the original table.
+        check(await sb.from('quote_requests').insert({ ...input, attachment_path, status: 'new' }));
+      } else check(res);
     },
     async submitContact(input) {
-      check(await sb.from('contact_messages').insert({ ...input, is_read: false }));
+      const res = await sb.from('contact_requests').insert({
+        request_type: input.request_type ?? 'contact', full_name: input.full_name, email: input.email, phone: input.phone,
+        subject: input.subject, message: input.message,
+      });
+      if (res.error && missingTable(res.error)) {
+        check(await sb.from('contact_messages').insert({
+          full_name: input.full_name, email: input.email, phone: input.phone, subject: input.subject, message: input.message, is_read: false,
+        }));
+      } else check(res);
     },
     async signIn(email, password) {
       const { error } = await sb.auth.signInWithPassword({ email, password });
@@ -108,7 +128,12 @@ function supabaseApi(sb: NonNullable<typeof supabase>): Api {
       return data.session?.user ? { email: data.session.user.email ?? '' } : null;
     },
     async isAdmin() {
-      const { data, error } = await sb.rpc('is_admin');
+      // Any active staff member may enter /admin; each module then checks its own permission.
+      const { data, error } = await sb.rpc('is_staff');
+      if (error && missingTable(error)) {
+        const legacy = await sb.rpc('is_admin');
+        return !legacy.error && legacy.data === true;
+      }
       return !error && data === true;
     },
     onAuthChange(cb) {
@@ -272,7 +297,9 @@ function demoApi(): Api {
     async submitContact(input) {
       await tick();
       const db = load();
-      db.messages.unshift({ ...input, id: uid(), is_read: false, created_at: new Date().toISOString() });
+      const row = { ...input };
+      delete row.request_type;
+      db.messages.unshift({ ...row, id: uid(), is_read: false, created_at: new Date().toISOString() });
       save(db);
     },
     async signIn(email, password) {

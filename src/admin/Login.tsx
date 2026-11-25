@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo';
 import { Img } from '@/components/Img';
 import { useAuth } from './auth';
 import { api, DEMO_CREDENTIALS } from '@/lib/api';
+import { supabase } from '@/lib/supabase';
 import { images } from '@/data/images';
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(location.state?.denied ? "Ce compte n'a pas les droits d'administration." : null);
+  const [error, setError] = useState<string | null>(location.state?.denied ? "Ce compte n'est pas activé pour l'espace de gestion." : null);
 
   if (!loading && session && isAdmin) return <Navigate to={location.state?.from ?? '/admin'} replace />;
 
@@ -28,9 +29,11 @@ export default function Login() {
       await signIn(email.trim(), password);
       if (!(await api.isAdmin())) {
         await signOut();
-        setError("Ce compte n'a pas les droits d'administration.");
+        setError("Ce compte n'est pas activé pour l'espace de gestion. Contactez un administrateur.");
         return;
       }
+      // Audit trail: last sign-in date + "Connexion" entry in the activity log (ERP databases only).
+      await supabase?.rpc('touch_last_login').then(() => undefined, () => undefined);
       navigate(location.state?.from ?? '/admin', { replace: true });
     } catch {
       setError('Identifiants incorrects.');
@@ -52,14 +55,14 @@ export default function Login() {
         <div className="absolute bottom-12 left-12 right-12 text-white">
           <span className="eyebrow">Administration</span>
           <p className="display-lg mt-5">Ultra Supply<span className="text-brand-red">.</span></p>
-          <p className="mt-4 text-white/60">Gestion du catalogue, des demandes de devis et du contenu du site.</p>
+          <p className="mt-4 text-white/60">Gestion commerciale, facturation, stock, achats et contenu du site.</p>
         </div>
       </div>
       <div className="flex flex-col justify-center px-6 py-16 sm:px-16">
         <div className="mx-auto w-full max-w-md">
           <Logo full className="!h-auto w-full max-w-[280px]" />
           <h1 className="mt-12 font-display text-3xl font-extrabold uppercase text-navy">Connexion</h1>
-          <p className="mt-2 text-navy/60">Espace réservé aux administrateurs.</p>
+          <p className="mt-2 text-navy/60">Espace réservé au personnel ULTRA SUPPLY.</p>
 
           {api.mode === 'demo' && (
             <div className="mt-6 border-l-[3px] border-brand-red bg-mist p-4 text-[13px] text-navy/80">

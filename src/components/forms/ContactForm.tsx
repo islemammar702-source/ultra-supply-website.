@@ -1,4 +1,5 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Loader2, Send } from 'lucide-react';
 import { Field } from './Field';
 import { SuccessPanel } from './SuccessPanel';
@@ -6,13 +7,18 @@ import { useI18n } from '@/i18n';
 import { api } from '@/lib/api';
 import { isEmail, isPhone, type Errors } from '@/lib/validation';
 import type { DictKey } from '@/i18n/fr';
+import type { ContactRequestType } from '@/lib/types';
 
 interface Values { full_name: string; email: string; phone: string; subject: string; message: string }
 const empty: Values = { full_name: '', email: '', phone: '', subject: '', message: '' };
+const TYPES: ContactRequestType[] = ['contact', 'product_inquiry', 'availability', 'partnership'];
+const isType = (v: string | null): v is ContactRequestType => TYPES.includes(v as ContactRequestType);
 
 export function ContactForm({ idPrefix = 'c' }: { idPrefix?: string }) {
   const { t } = useI18n();
+  const [params] = useSearchParams();
   const [values, setValues] = useState<Values>(empty);
+  const [requestType, setRequestType] = useState<ContactRequestType>(() => (isType(params.get('type')) ? (params.get('type') as ContactRequestType) : 'contact'));
   const [errors, setErrors] = useState<Errors<Values>>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
   const [honeypot, setHoneypot] = useState('');
@@ -47,7 +53,7 @@ export function ContactForm({ idPrefix = 'c' }: { idPrefix?: string }) {
     try {
       await api.submitContact({
         full_name: values.full_name.trim(), email: values.email.trim(), phone: values.phone.trim(),
-        subject: values.subject.trim(), message: values.message.trim(),
+        subject: values.subject.trim(), message: values.message.trim(), request_type: requestType,
       });
       setStatus('done');
     } catch {
@@ -77,7 +83,12 @@ export function ContactForm({ idPrefix = 'c' }: { idPrefix?: string }) {
       <Field id={id('phone')} label={t('contact.phoneField')} error={err('phone')}>
         <input id={id('phone')} name="phone" type="tel" dir="ltr" className="field rtl:text-right" autoComplete="tel" maxLength={30} value={values.phone} onChange={set('phone')} {...aria('phone')} />
       </Field>
-      <Field id={id('subject')} label={t('contact.subject')} required error={err('subject')}>
+      <Field id={id('type')} label={t('contact.type')}>
+        <select id={id('type')} name="request_type" className="field" value={requestType} onChange={(e) => setRequestType(isType(e.target.value) ? e.target.value : 'contact')}>
+          {TYPES.map((v) => <option key={v} value={v}>{t(`contact.type.${v}` as DictKey)}</option>)}
+        </select>
+      </Field>
+      <Field id={id('subject')} label={t('contact.subject')} required error={err('subject')} className="sm:col-span-2">
         <input id={id('subject')} name="subject" className="field" maxLength={200} value={values.subject} onChange={set('subject')} {...aria('subject')} />
       </Field>
       <Field id={id('message')} label={t('contact.message')} required error={err('message')} className="sm:col-span-2">

@@ -53,7 +53,7 @@ export default function ImportDistribution() {
             <span className="block h-[3px] w-10 bg-brand-red" />
             <h2 className="display-md mt-8">{t('import.suppliersTitle')}</h2>
             <p className="mt-5 text-[17px] text-white/75">{t('import.suppliersText')}</p>
-            <Link to="/contact" className="btn btn-red mt-10">{t('import.suppliersCta')} <ArrowRight className="h-4 w-4 rtl:rotate-180" /></Link>
+            <Link to="/contact?type=partnership" className="btn btn-red mt-10">{t('import.suppliersCta')} <ArrowRight className="h-4 w-4 rtl:rotate-180" /></Link>
           </Reveal>
         </div>
       </section>

@@ -28,6 +28,7 @@ export function notifyContact(c: ContactInput) {
     'Nom complet': c.full_name,
     'E-mail': c.email,
     'Téléphone': c.phone || '—',
+    'Type': { contact: 'Contact', product_inquiry: 'Information produit', availability: 'Disponibilité', partnership: 'Partenariat' }[c.request_type ?? 'contact'],
     'Sujet': c.subject || '—',
     'Message': c.message,
   });

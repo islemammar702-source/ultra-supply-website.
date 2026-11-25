@@ -25,7 +25,7 @@ export default function Partners() {
               <p className="mt-4 max-w-2xl text-[17px] text-navy-950/70">{t('partners.becomeText')}</p>
             </div>
             <div className="lg:col-span-3 lg:text-end">
-              <Link to="/contact" className="btn btn-navy">{t('import.suppliersCta')} <ArrowRight className="h-4 w-4 rtl:rotate-180" /></Link>
+              <Link to="/contact?type=partnership" className="btn btn-navy">{t('import.suppliersCta')} <ArrowRight className="h-4 w-4 rtl:rotate-180" /></Link>
             </div>
           </Reveal>
         </div>
