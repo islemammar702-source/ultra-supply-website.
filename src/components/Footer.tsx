@@ -19,19 +19,16 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-navy-950 text-white">
-      <div className="pointer-events-none absolute -end-32 -top-40 select-none font-display text-[22rem] font-black uppercase leading-none text-white/[0.025]" aria-hidden dir="ltr">
-        US
-      </div>
-      <div className="container-site relative pb-10 pt-20 lg:pt-24">
-        <div className="grid gap-14 lg:grid-cols-12">
+      <div className="container-site relative pb-8 pt-14 lg:pt-16">
+        <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo variant="light" full className="!h-auto w-full max-w-[300px]" />
             <p className="mt-6 max-w-sm text-[14.5px] leading-relaxed text-white/60">{t('footer.description')}</p>
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">{t('footer.follow')}</p>
+            <p className="mt-6 text-[13px] font-medium text-white/45">{t('footer.follow')}</p>
             <ul className="mt-3 flex gap-2">
               {SOCIALS.map(({ key, label, Icon }) => {
                 const href = t(key);
-                const cls = 'flex h-11 w-11 items-center justify-center border border-white/15 transition-colors';
+                const cls = 'chamfer chamfer-sm flex h-11 w-11 items-center justify-center bg-white/10 transition-colors';
                 return (
                   <li key={key}>
                     {href ? (
@@ -50,7 +47,7 @@ export function Footer() {
           </div>
 
           <nav aria-label={t('footer.navigation')} className="lg:col-span-2">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-red">{t('footer.navigation')}</h2>
+            <h2 className="text-[14px] font-semibold text-white">{t('footer.navigation')}</h2>
             <ul className="mt-6 space-y-3 text-[14.5px]">
               {[...NAV, { to: '/quote', key: 'nav.quote' as DictKey }].map((n) => (
                 <li key={n.to}>
@@ -61,7 +58,7 @@ export function Footer() {
           </nav>
 
           <nav aria-label={t('footer.categories')} className="lg:col-span-3">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-red">{t('footer.categories')}</h2>
+            <h2 className="text-[14px] font-semibold text-white">{t('footer.categories')}</h2>
             <ul className="mt-6 space-y-3 text-[14.5px]">
               {categories.map((c) => (
                 <li key={c.id}>
@@ -72,7 +69,7 @@ export function Footer() {
           </nav>
 
           <div className="lg:col-span-3">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-red">{t('footer.contact')}</h2>
+            <h2 className="text-[14px] font-semibold text-white">{t('footer.contact')}</h2>
             <ul className="mt-6 space-y-4 text-[14.5px] text-white/70">
               <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-white/40" /><span dir="ltr">{t('contact.phoneValue')}</span></li>
               <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-white/40" /><span className="break-all">{t('contact.emailValue')}</span></li>

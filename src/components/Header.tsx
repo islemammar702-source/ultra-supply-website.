@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Building2, Factory, FileText, Handshake, House, Mail, Menu, Package, Ship, X, type LucideIcon } from 'lucide-react';
 import { Logo } from './Logo';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useI18n } from '@/i18n';
 import { NAV } from '@/lib/routes';
+
+const NAV_ICONS: Record<string, LucideIcon> = {
+  '/': House, '/products': Package, '/industries': Factory, '/import-distribution': Ship, '/about': Building2, '/partners': Handshake, '/contact': Mail,
+};
 
 export function Header() {
   const { t } = useI18n();
@@ -46,7 +50,7 @@ export function Header() {
           <Logo variant={overHero ? 'light' : 'dark'} />
         </Link>
 
-        <nav aria-label="Main" className="hidden min-[1360px]:block">
+        <nav aria-label="Main" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <li key={item.to}>
@@ -54,7 +58,7 @@ export function Header() {
                   to={item.to}
                   end={item.to === '/'}
                   className={({ isActive }) =>
-                    `group relative block whitespace-nowrap px-2.5 py-2 text-[13px] font-medium transition-colors ${
+                    `group relative block whitespace-nowrap px-2.5 py-2 text-[14px] font-medium transition-colors ${
                       overHero ? 'text-white/85 hover:text-white' : 'text-navy/80 hover:text-navy'
                     } ${isActive ? (overHero ? '!text-white' : '!text-navy') : ''}`
                   }
@@ -77,13 +81,13 @@ export function Header() {
 
         <div className="flex items-center gap-3 sm:gap-5">
           <LanguageSwitcher tone={overHero ? 'light' : 'dark'} className="hidden sm:flex" />
-          <Link to="/quote" className="btn btn-red hidden !min-h-[44px] !px-5 !tracking-[0.12em] md:inline-flex">
+          <Link to="/quote" className="btn btn-red hidden !min-h-[44px] !px-5 md:inline-flex">
+            <FileText className="h-4 w-4" />
             {t('nav.quote')}
-            <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
           </Link>
           <button
             type="button"
-            className={`flex h-11 w-11 items-center justify-center min-[1360px]:hidden ${overHero ? 'text-white' : 'text-navy'}`}
+            className={`flex h-11 w-11 items-center justify-center xl:hidden ${overHero ? 'text-white' : 'text-navy'}`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t('nav.close') : t('nav.menu')}
@@ -97,30 +101,33 @@ export function Header() {
       {/* Mobile drawer */}
       <div
         id="mobile-nav"
-        className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-white transition-all duration-500 min-[1360px]:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-white transition-all duration-300 xl:hidden ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
         } ${scrolled ? 'top-[72px]' : 'top-[88px]'}`}
       >
         <nav aria-label="Mobile" className="container-site flex min-h-full flex-col py-8">
-          <ul className="divide-y divide-navy/10 border-y border-navy/10">
-            {NAV.map((item, i) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.to === '/'}
-                  className={({ isActive }) =>
-                    `flex items-center justify-between py-5 font-display text-2xl font-bold uppercase ${isActive ? 'text-brand-red' : 'text-navy'}`
-                  }
-                >
-                  <span>{t(item.key)}</span>
-                  <span className="text-xs font-medium text-navy/40">0{i + 1}</span>
-                </NavLink>
-              </li>
-            ))}
+          <ul className="grid grid-cols-2 gap-2">
+            {NAV.map((item) => {
+              const Icon = NAV_ICONS[item.to] ?? Package;
+              return (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `chamfer chamfer-sm flex min-h-[88px] flex-col justify-between p-4 font-display text-[16px] font-bold transition-colors ${isActive ? 'bg-navy text-white' : 'bg-mist text-navy hover:bg-navy-100'}`
+                    }
+                  >
+                    <Icon className="h-5 w-5 text-brand-red" strokeWidth={1.75} />
+                    <span>{t(item.key)}</span>
+                  </NavLink>
+                </li>
+              );
+            })}
           </ul>
           <div className="mt-8 flex flex-col gap-6">
             <Link to="/quote" className="btn btn-red w-full">
-              {t('nav.quote')}
+              <FileText className="h-4 w-4" /> {t('nav.quote')} <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
             </Link>
             <LanguageSwitcher className="justify-center" />
           </div>

@@ -22,20 +22,20 @@ export function ContactSection({ heading = true }: { heading?: boolean }) {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(t('contact.mapQuery'))}&output=embed`;
 
   return (
-    <section id="contact" aria-labelledby={heading ? 'contact-title' : undefined} className="scroll-mt-24 py-24 sm:py-32">
+    <section id="contact" aria-labelledby={heading ? 'contact-title' : undefined} className="section-y scroll-mt-24">
       <div className="container-site">
-        {heading && <SectionHeading id="contact-title" label={t('contact.label')} title={t('contact.title')} subtitle={t('contact.subtitle')} />}
-        <div className={`grid gap-12 lg:grid-cols-12 ${heading ? 'mt-14' : ''}`}>
+        {heading && <SectionHeading id="contact-title" label={t('contact.label')} title={t('contact.title')} />}
+        <div className={`grid gap-8 lg:grid-cols-12 ${heading ? 'mt-10' : ''}`}>
           <Reveal className="lg:col-span-5">
             <ul className="grid gap-px border border-navy/10 bg-navy/10 sm:grid-cols-2 lg:grid-cols-1">
               {items.map(({ Icon, label, value, href, ltr }) => {
                 const body = (
                   <>
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-navy text-white transition-colors group-hover:bg-brand-red">
+                    <span className="chamfer chamfer-sm flex h-11 w-11 shrink-0 items-center justify-center bg-navy text-white transition-colors group-hover:bg-brand-red">
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-navy/50 rtl:text-[13px] rtl:normal-case rtl:tracking-normal">{label}</span>
+                      <span className="block text-[12.5px] font-medium text-navy/50">{label}</span>
                       <span className="mt-1 block break-words text-[16px] font-medium text-navy" dir={ltr ? 'ltr' : undefined} style={ltr ? { textAlign: 'start', unicodeBidi: 'plaintext' } : undefined}>{value}</span>
                     </span>
                   </>
@@ -43,9 +43,9 @@ export function ContactSection({ heading = true }: { heading?: boolean }) {
                 return (
                   <li key={label + value} className="bg-white">
                     {href ? (
-                      <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="group flex items-center gap-5 p-6 hover:bg-mist">{body}</a>
+                      <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="group flex items-center gap-4 p-5 hover:bg-mist">{body}</a>
                     ) : (
-                      <div className="group flex items-center gap-5 p-6">{body}</div>
+                      <div className="group flex items-center gap-4 p-5">{body}</div>
                     )}
                   </li>
                 );
@@ -63,10 +63,9 @@ export function ContactSection({ heading = true }: { heading?: boolean }) {
             </div>
           </Reveal>
           <Reveal delay={120} className="lg:col-span-7">
-            <div className="border border-navy/10 bg-white p-6 shadow-[0_40px_80px_-50px_rgba(10,36,69,0.35)] sm:p-10">
+            <div className="chamfer chamfer-lg bg-mist p-6 sm:p-9">
               <h3 className="display-md text-navy">{t('contact.formTitle')}</h3>
-              <span className="mt-5 block h-[3px] w-10 bg-brand-red" />
-              <div className="mt-8"><ContactForm /></div>
+              <div className="mt-6"><ContactForm /></div>
             </div>
           </Reveal>
         </div>

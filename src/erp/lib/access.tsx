@@ -80,7 +80,7 @@ function Denied({ title, text }: { title: string; text: string }) {
   return (
     <div className="mx-auto mt-16 max-w-lg border border-navy/10 bg-white p-10 text-center">
       <ShieldAlert className="mx-auto h-8 w-8 text-brand-red" />
-      <h1 className="mt-4 font-display text-xl font-bold uppercase text-navy">{title}</h1>
+      <h1 className="mt-4 font-display text-xl font-bold text-navy">{title}</h1>
       <p className="mt-2 text-sm text-navy/60">{text}</p>
     </div>
   );

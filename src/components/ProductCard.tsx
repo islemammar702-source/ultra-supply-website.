@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FileText } from 'lucide-react';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import { Img } from './Img';
 import { useI18n } from '@/i18n';
 import type { Category, Product } from '@/lib/types';
@@ -13,31 +13,25 @@ export function ProductCard({ product, category }: Props) {
   const { t, loc } = useI18n();
   const name = loc(product.name);
   return (
-    <article className="group flex h-full flex-col border border-navy/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_30px_60px_-35px_rgba(10,36,69,0.45)]">
-      <Link to={`/products/${product.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-mist" tabIndex={-1} aria-hidden>
-        <Img src={product.image_url} alt={name} className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105" />
+    <article className="group relative flex h-full flex-col bg-white ring-1 ring-navy/10 transition-shadow duration-300 hover:shadow-[0_24px_48px_-30px_rgba(10,36,69,0.5)]">
+      <Link to={`/products/${product.slug}`} className="chamfer chamfer-lg relative block aspect-[4/3] overflow-hidden bg-mist" tabIndex={-1} aria-hidden>
+        <Img src={product.image_url} alt={name} className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
         {category && (
-          <span className="absolute start-4 top-4 bg-white px-3 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-navy rtl:text-[12px] rtl:normal-case rtl:tracking-normal">
-            {loc(category.name)}
-          </span>
+          <span className="absolute start-3 top-3 bg-white/95 px-2.5 py-1 text-[12px] font-semibold text-navy">{loc(category.name)}</span>
         )}
       </Link>
-      <div className="flex flex-1 flex-col p-6">
-        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-navy/45" dir="ltr">
-          <span className="rtl:hidden">{t('common.reference')} · </span>
-          <span className="font-mono tracking-normal">{product.reference}</span>
-        </p>
-        <h3 className="mt-2 font-display text-[21px] font-bold uppercase leading-tight text-navy rtl:normal-case">
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[12px] text-navy/45" dir="ltr">{product.reference}</p>
+        <h3 className="mt-1 font-display text-[18px] font-bold leading-snug text-navy">
           <Link to={`/products/${product.slug}`} className="transition-colors hover:text-brand-red">{name}</Link>
         </h3>
-        <p className="mt-3 line-clamp-3 flex-1 text-[14.5px] text-navy-950/65">{loc(product.description)}</p>
-        <div className="mt-6 grid grid-cols-2 gap-2">
-          <Link to={`/products/${product.slug}`} className="btn btn-ghost !min-h-[44px] !whitespace-normal !px-3 !text-[11px] rtl:!text-[13px]">
-            {t('common.viewDetails')}
+        <p className="mt-2 line-clamp-2 flex-1 text-[14px] text-navy-950/60">{loc(product.description)}</p>
+        <div className="mt-5 flex items-center justify-between gap-3">
+          <Link to={`/products/${product.slug}`} className="btn-link !text-[13px]">
+            {t('common.viewDetails')} <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
           </Link>
-          <Link to={`/quote?product=${product.slug}`} className="btn btn-red !min-h-[44px] !whitespace-normal !px-3 !text-[11px] rtl:!text-[13px]">
-            <FileText className="hidden h-3.5 w-3.5 sm:block" />
-            {t('common.requestQuote')}
+          <Link to={`/quote?product=${product.slug}`} className="btn btn-red !min-h-[40px] !px-4 !text-[13px]">
+            <FileText className="h-4 w-4" /> {t('common.requestQuote')}
           </Link>
         </div>
       </div>

@@ -94,12 +94,12 @@ export default function Products() {
             </div>
             <div className="-mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="list">
               <button type="button" role="listitem" onClick={() => update('category', '')}
-                className={`min-h-[36px] shrink-0 whitespace-nowrap px-4 text-[12px] font-semibold transition-colors ${!category ? 'bg-navy text-white' : 'bg-mist text-navy hover:bg-navy-100'}`}>
+                className={`min-h-[38px] shrink-0 whitespace-nowrap px-4 text-[13px] font-semibold transition-colors ${!category ? 'bg-navy text-white' : 'bg-mist text-navy hover:bg-navy-100'}`}>
                 {t('products.allCategories')}
               </button>
               {categories.map((c) => (
                 <button key={c.id} type="button" role="listitem" onClick={() => update('category', c.slug)} aria-pressed={category === c.slug}
-                  className={`min-h-[36px] shrink-0 whitespace-nowrap px-4 text-[12px] font-semibold transition-colors ${category === c.slug ? 'bg-navy text-white' : 'bg-mist text-navy hover:bg-navy-100'}`}>
+                  className={`min-h-[38px] shrink-0 whitespace-nowrap px-4 text-[13px] font-semibold transition-colors ${category === c.slug ? 'bg-navy text-white' : 'bg-mist text-navy hover:bg-navy-100'}`}>
                   {loc(c.name)}
                 </button>
               ))}
@@ -108,7 +108,7 @@ export default function Products() {
 
           <div className="mt-8 flex items-center justify-between text-[13px] text-navy/60">
             <p aria-live="polite">{t('products.results', { count: filtered.length })}</p>
-            <p className="font-semibold uppercase tracking-[0.14em] text-brand-red rtl:tracking-normal">{t('products.priceOnRequest')}</p>
+            <p className="font-semibold text-brand-red">{t('products.priceOnRequest')}</p>
           </div>
 
           {loading ? (

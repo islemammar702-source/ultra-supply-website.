@@ -16,7 +16,7 @@ export default function About() {
       <Seo title={t('nav.about')} description={t('seo.about.description')} />
       <PageHero label={t('intro.label')} title={t('about.pageTitle')} intro={t('about.pageIntro')} image={images.about} crumbs={[{ label: t('nav.about') }]} />
 
-      <section className="py-24 sm:py-32">
+      <section className="section-y">
         <div className="container-site grid gap-14 lg:grid-cols-12">
           <Reveal className="lg:col-span-6">
             <span className="eyebrow">{t('intro.label')}</span>
@@ -39,7 +39,7 @@ export default function About() {
             ].map(({ Icon, title, text, dark }, i) => (
               <Reveal key={title} delay={i * 120} className={`flex flex-col justify-center p-8 sm:p-10 ${dark ? 'bg-navy text-white' : 'bg-mist text-navy'}`}>
                 <Icon className={`h-8 w-8 ${dark ? 'text-brand-red' : 'text-navy'}`} strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-2xl font-bold uppercase rtl:normal-case">{title}</h3>
+                <h3 className="mt-5 font-display text-xl font-bold">{title}</h3>
                 <p className={`mt-3 text-[15.5px] ${dark ? 'text-white/75' : 'text-navy-950/70'}`}>{text}</p>
               </Reveal>
             ))}
@@ -54,7 +54,7 @@ export default function About() {
             {[1, 2, 3, 4].map((n) => (
               <li key={n} className="bg-navy-950 py-8 sm:px-8">
                 <span className="font-display text-sm font-bold text-brand-red" dir="ltr">0{n}</span>
-                <p className="mt-4 font-display text-[clamp(1.4rem,2.2vw,2rem)] font-extrabold uppercase leading-tight rtl:normal-case">{t(`about.value${n}` as DictKey)}</p>
+                <p className="mt-4 font-display text-[clamp(1.4rem,2.2vw,2rem)] font-extrabold leading-tight">{t(`about.value${n}` as DictKey)}</p>
               </li>
             ))}
           </ul>

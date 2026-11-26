@@ -49,7 +49,7 @@ export default function DocumentsPage() {
         ]} />
       </div>
       <div className="mt-6 border border-navy/10 bg-white p-5">
-        <h2 className="mb-3 font-display text-[15px] font-bold uppercase text-navy">Documents généraux</h2>
+        <h2 className="mb-3 font-display text-[15px] font-bold text-navy">Documents généraux</h2>
         <DocumentsPanel entityType="company" entityId="00000000-0000-4000-8000-000000000000" docType="other" />
       </div>
     </>

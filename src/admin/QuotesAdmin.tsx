@@ -56,7 +56,7 @@ export default function QuotesAdmin() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] text-left text-sm">
-            <thead className="bg-mist text-[11px] uppercase tracking-wider text-navy/60">
+            <thead className="bg-mist text-[12px] text-navy/60">
               <tr><th className="px-4 py-3">Date</th><th className="px-4 py-3">Client</th><th className="px-4 py-3">Produit</th><th className="px-4 py-3">Qté</th><th className="px-4 py-3">Statut</th><th className="px-4 py-3" /></tr>
             </thead>
             <tbody className="divide-y divide-navy/10">

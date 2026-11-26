@@ -14,7 +14,7 @@ export default function Partners() {
       <Seo title={t('nav.partners')} description={t('seo.partners.description')} />
       <PageHero label={t('partners.label')} title={t('partners.title')} intro={t('partners.pageIntro')} image={images.sourcing} crumbs={[{ label: t('nav.partners') }]} />
       <PartnersSection showLink={false} />
-      <section className="py-24 sm:py-28">
+      <section className="section-y">
         <div className="container-site">
           <Reveal className="grid items-center gap-10 border border-navy/10 p-8 sm:p-14 lg:grid-cols-12">
             <div className="lg:col-span-1">

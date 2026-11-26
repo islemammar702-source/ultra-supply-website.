@@ -14,7 +14,7 @@ const TONES: Record<Tone, string> = {
 };
 
 export function Pill({ tone = 'navy', children }: { tone?: Tone; children: ReactNode }) {
-  return <span className={`inline-flex items-center whitespace-nowrap px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${TONES[tone]}`}>{children}</span>;
+  return <span className={`inline-flex items-center whitespace-nowrap px-2 py-0.5 text-[12px] font-semibold ${TONES[tone]}`}>{children}</span>;
 }
 
 export function StatusBadge({ map, value }: { map: Record<string, StatusDef>; value: string }) {
@@ -56,15 +56,13 @@ export function StatCard({ label, value, hint, accent, icon, onClick }: {
 }) {
   const Tag = onClick ? 'button' : 'div';
   return (
-    <Tag onClick={onClick} className={`flex min-h-[132px] flex-col justify-between p-5 text-left transition-shadow ${onClick ? 'hover:shadow-lg' : ''} ${accent ? 'bg-navy text-white' : 'border border-navy/10 bg-white'}`}>
-      <div className="flex items-start justify-between gap-3">
-        <p className={`text-[12px] font-semibold uppercase tracking-[0.12em] ${accent ? 'text-white/70' : 'text-navy/55'}`}>{label}</p>
-        {icon && <span className={accent ? 'text-brand-red' : 'text-navy/40'}>{icon}</span>}
+    <Tag onClick={onClick} className={`flex flex-col gap-3 p-5 text-left transition-shadow ${onClick ? 'hover:shadow-[0_18px_40px_-24px_rgba(10,36,69,0.45)]' : ''} ${accent ? 'chamfer chamfer-lg bg-navy text-white' : 'bg-white ring-1 ring-navy/10'}`}>
+      <div className="flex items-center gap-3">
+        {icon && <span className={`chamfer chamfer-sm flex h-9 w-9 shrink-0 items-center justify-center ${accent ? 'bg-brand-red text-white' : 'bg-navy-50 text-navy'}`}>{icon}</span>}
+        <p className={`text-[13px] font-medium ${accent ? 'text-white/75' : 'text-navy/60'}`}>{label}</p>
       </div>
-      <div>
-        <p className="mt-3 font-display text-[26px] font-extrabold leading-tight tracking-tight">{value}</p>
-        {hint && <p className={`mt-1 text-[12.5px] ${accent ? 'text-white/60' : 'text-navy/50'}`}>{hint}</p>}
-      </div>
+      <p className="font-display text-[24px] font-extrabold leading-tight tracking-tight">{value}</p>
+      {hint && <p className={`-mt-1 text-[12.5px] ${accent ? 'text-white/60' : 'text-navy/50'}`}>{hint}</p>}
     </Tag>
   );
 }
@@ -223,7 +221,7 @@ export function DataTable<T extends { id: string | number }>({ columns, rows, on
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm" style={{ minWidth }}>
-        <thead className="bg-mist text-[11px] uppercase tracking-wider text-navy/60">
+        <thead className="bg-mist text-[12px] text-navy/60">
           <tr>{columns.map((c) => <th key={c.key} className={`whitespace-nowrap px-4 py-3 font-semibold ${align(c.align)} ${c.className ?? ''}`}>{c.header}</th>)}</tr>
         </thead>
         <tbody className="divide-y divide-navy/10">
@@ -246,7 +244,7 @@ export function Tabs<T extends string>({ value, onChange, tabs }: { value: T; on
     <div className="flex gap-1 overflow-x-auto border-b border-navy/10" role="tablist">
       {tabs.map((t) => (
         <button key={t.value} role="tab" aria-selected={value === t.value} onClick={() => onChange(t.value)}
-          className={`-mb-px whitespace-nowrap border-b-2 px-4 py-3 text-[13px] font-semibold ${value === t.value ? 'border-brand-red text-navy' : 'border-transparent text-navy/50 hover:text-navy'}`}>
+          className={`-mb-px whitespace-nowrap border-b-2 px-4 py-3 text-[14px] font-semibold ${value === t.value ? 'border-brand-red text-navy' : 'border-transparent text-navy/50 hover:text-navy'}`}>
           {t.label}{t.count !== undefined && <span className="ml-1.5 text-navy/40">{t.count}</span>}
         </button>
       ))}
@@ -352,7 +350,7 @@ export function Section({ title, actions, children, className = '' }: { title: s
   return (
     <section className={`border border-navy/10 bg-white ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-navy/10 px-5 py-3.5">
-        <h2 className="font-display text-[15px] font-bold uppercase tracking-wide text-navy">{title}</h2>
+        <h2 className="font-display text-[16px] font-bold text-navy">{title}</h2>
         {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
       </div>
       <div>{children}</div>

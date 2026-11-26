@@ -12,7 +12,7 @@ export function PartnerLogo({ partner, index }: { partner: Partner; index: numbe
         <rect x="1" y="1" width="38" height="38" fill="none" stroke="currentColor" strokeDasharray="3 3" />
         <path d="M12 26 20 13l8 13z" fill="currentColor" opacity=".5" />
       </svg>
-      <span className="text-[10.5px] font-semibold uppercase tracking-[0.2em] rtl:text-[12px] rtl:tracking-normal">
+      <span className="text-[12px] font-medium">
         {t('partners.slot')} <span dir="ltr">{String(index + 1).padStart(2, '0')}</span>
       </span>
     </span>

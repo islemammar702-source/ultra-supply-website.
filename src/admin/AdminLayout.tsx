@@ -11,6 +11,7 @@ import { Toaster } from './ui';
 import { api } from '@/lib/api';
 import { AccessProvider, useAccess } from '@/erp/lib/access';
 import { erpEnabled, logEvent } from '@/erp/lib/db';
+import { QuickCreate } from '@/erp/components/QuickCreate';
 
 interface NavItem { to: string; label: string; Icon: typeof Package; perm?: string; end?: boolean }
 interface NavGroup { title: string; items: NavItem[] }
@@ -108,7 +109,7 @@ function Shell() {
     <nav className="flex flex-1 flex-col gap-5 overflow-y-auto p-4" aria-label="Administration">
       {groups.map((g) => (
         <div key={g.title}>
-          <p className="px-4 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/35">{g.title}</p>
+          <p className="px-4 pb-1.5 text-[12px] font-medium text-white/40">{g.title}</p>
           {g.items.map(({ to, label, Icon, end }) => (
             <NavLink key={to} to={to} end={end}
               className={({ isActive }) => `flex items-center gap-3 px-4 py-2.5 text-[13.5px] font-medium transition-colors ${isActive ? 'bg-white/10 text-white shadow-[inset_3px_0_0_#D92332]' : 'text-white/65 hover:bg-white/5 hover:text-white'}`}>
@@ -147,11 +148,19 @@ function Shell() {
       {open && <div className="fixed inset-0 z-30 bg-navy-950/50 lg:hidden" onClick={() => setOpen(false)} />}
 
       <div className="lg:pl-72">
-        <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b border-navy/10 bg-white px-4 lg:hidden">
-          <button onClick={() => setOpen(true)} aria-label="Ouvrir le menu" className="flex h-10 w-10 items-center justify-center"><Menu className="h-5 w-5" /></button>
-          <Logo className="!h-9" />
+        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-navy/10 bg-white/95 px-4 backdrop-blur sm:px-8">
+          <button onClick={() => setOpen(true)} aria-label="Ouvrir le menu" className="flex h-10 w-10 items-center justify-center lg:hidden"><Menu className="h-5 w-5" /></button>
+          <Logo className="!h-9 lg:hidden" />
+          <p className="hidden text-[14px] text-navy/60 lg:block">
+            Bonjour <strong className="font-semibold text-navy">{access?.full_name || session?.email}</strong>
+            <span className="ms-2 text-navy/40">{new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+          </p>
+          <div className="ms-auto flex items-center gap-2">
+            {erpEnabled && <Link to="/admin/requests" className="hidden h-10 items-center gap-2 px-3 text-[14px] font-medium text-navy/70 hover:bg-mist hover:text-navy sm:flex" title="Demandes du site"><Inbox className="h-4 w-4" /> Demandes</Link>}
+            <QuickCreate />
+          </div>
         </header>
-        <main className="mx-auto max-w-[1400px] px-4 py-8 sm:px-8 sm:py-10">
+        <main className="mx-auto max-w-[1400px] px-4 py-6 sm:px-8 sm:py-8">
           <Outlet />
         </main>
       </div>

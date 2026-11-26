@@ -49,7 +49,7 @@ export default function LogsPage() {
           <p className="mb-3 text-sm text-navy/60">{fmtDateTime(open.created_at)} · {open.user_email || 'Système'} {open.entity_label && `· ${open.entity_label}`}</p>
           {open.action === 'update' ? (
             <table className="w-full text-sm">
-              <thead className="bg-mist text-[11px] uppercase text-navy/60"><tr><th className="px-3 py-2 text-left">Champ</th><th className="px-3 py-2 text-left">Avant</th><th className="px-3 py-2 text-left">Après</th></tr></thead>
+              <thead className="bg-mist text-[12px] text-navy/60"><tr><th className="px-3 py-2 text-left">Champ</th><th className="px-3 py-2 text-left">Avant</th><th className="px-3 py-2 text-left">Après</th></tr></thead>
               <tbody className="divide-y divide-navy/10">
                 {Object.entries(open.details).map(([k, v]) => {
                   const d = v as { from?: unknown; to?: unknown };

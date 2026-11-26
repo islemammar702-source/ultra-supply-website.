@@ -14,7 +14,7 @@ export function LanguageSwitcher({ tone = 'dark', className = '' }: { tone?: 'da
             aria-pressed={locale === l.code}
             lang={l.code}
             title={l.name}
-            className={`min-h-[36px] min-w-[32px] px-1.5 text-[11.5px] font-semibold tracking-[0.12em] transition-colors ${
+            className={`min-h-[36px] min-w-[32px] px-1.5 text-[12.5px] font-semibold transition-colors ${
               locale === l.code
                 ? 'text-brand-red'
                 : light ? 'text-white/70 hover:text-white' : 'text-navy/55 hover:text-navy'

@@ -18,7 +18,7 @@ export default function ImportDistribution() {
       <Seo title={t('nav.import')} description={t('seo.import.description')} />
       <PageHero label={t('import.label')} title={t('import.title')} intro={t('import.description')} image={images.logistics} crumbs={[{ label: t('nav.import') }]} />
 
-      <section className="py-24 sm:py-32" aria-labelledby="process-title">
+      <section className="section-y" aria-labelledby="process-title">
         <div className="container-site">
           <SectionHeading id="process-title" label={t('import.label')} title={t('import.processTitle')} subtitle={t('import.pageIntro')} />
           <ol className="mt-16 space-y-6">
@@ -39,7 +39,7 @@ export default function ImportDistribution() {
         </div>
       </section>
 
-      <section className="bg-mist py-24 sm:py-28">
+      <section className="section-y bg-mist">
         <div className="container-site grid gap-6 lg:grid-cols-2">
           <Reveal className="relative overflow-hidden bg-navy p-10 text-white sm:p-14">
             <PackageSearch className="h-10 w-10 text-brand-red" strokeWidth={1.2} />

@@ -15,15 +15,15 @@ export function SectionHeading({ label, title, subtitle, align = 'start', tone =
   const light = tone === 'light';
   return (
     <Reveal
-      className={`flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between ${align === 'center' ? 'items-center text-center lg:flex-col lg:items-center' : ''}`}
+      className={`flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between ${align === 'center' ? 'items-center text-center lg:flex-col lg:items-center' : ''}`}
     >
       <div className={align === 'center' ? 'max-w-3xl' : 'max-w-4xl'}>
         <span className="eyebrow">{label}</span>
-        <h2 id={id} className={`display-lg mt-5 ${light ? 'text-white' : 'text-navy'}`}>
+        <h2 id={id} className={`display-lg mt-4 ${light ? 'text-white' : 'text-navy'}`}>
           {title}
         </h2>
         {subtitle && (
-          <p className={`mt-5 max-w-2xl text-[17px] leading-relaxed ${light ? 'text-white/70' : 'text-navy-950/65'} ${align === 'center' ? 'mx-auto' : ''}`}>
+          <p className={`mt-4 max-w-2xl text-[16px] leading-relaxed ${light ? 'text-white/70' : 'text-navy-950/65'} ${align === 'center' ? 'mx-auto' : ''}`}>
             {subtitle}
           </p>
         )}

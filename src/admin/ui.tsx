@@ -6,9 +6,9 @@ import type { Locale, Translated } from '@/lib/types';
 
 export function PageHeader({ title, subtitle, actions }: { title: string; subtitle?: string; actions?: ReactNode }) {
   return (
-    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="font-display text-2xl font-extrabold uppercase tracking-tight text-navy sm:text-3xl" style={{ fontStretch: '106%' }}>{title}</h1>
+        <h1 className="font-display text-[26px] font-extrabold tracking-tight text-navy sm:text-[30px]" style={{ fontStretch: '106%' }}>{title}</h1>
         {subtitle && <p className="mt-1 text-sm text-navy/60">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -38,7 +38,7 @@ export function Modal({ open, title, onClose, children, footer, wide }: {
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-navy-950/60 p-4 backdrop-blur-sm sm:p-8" dir="ltr" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div role="dialog" aria-modal="true" aria-label={title} className={`relative w-full bg-white shadow-2xl ${wide ? 'max-w-4xl' : 'max-w-xl'}`}>
         <div className="flex items-center justify-between border-b border-navy/10 px-6 py-4">
-          <h2 className="font-display text-lg font-bold uppercase text-navy">{title}</h2>
+          <h2 className="font-display text-lg font-bold text-navy">{title}</h2>
           <button type="button" onClick={onClose} className="flex h-10 w-10 items-center justify-center text-navy/60 hover:text-navy" aria-label="Fermer"><X className="h-5 w-5" /></button>
         </div>
         <div className="max-h-[calc(100vh-14rem)] overflow-y-auto px-6 py-6">{children}</div>
@@ -186,5 +186,5 @@ export const fmtDate = (iso: string) =>
 
 export function Badge({ children, tone = 'navy' }: { children: ReactNode; tone?: 'navy' | 'red' | 'gray' | 'green' }) {
   const tones = { navy: 'bg-navy-100 text-navy', red: 'bg-brand-red/10 text-brand-red', gray: 'bg-mist text-navy/60', green: 'bg-navy text-white' };
-  return <span className={`inline-flex items-center px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${tones[tone]}`}>{children}</span>;
+  return <span className={`inline-flex items-center px-2 py-0.5 text-[12px] font-semibold ${tones[tone]}`}>{children}</span>;
 }

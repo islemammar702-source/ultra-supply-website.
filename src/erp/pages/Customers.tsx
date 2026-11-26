@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Download, FileText, Loader2, Pencil, Plus, Receipt, Wallet } from 'lucide-react';
 import { Modal, PageHeader, toast } from '@/admin/ui';
 import { errMsg, logEvent, sb, unwrap } from '../lib/db';
@@ -27,7 +27,8 @@ export default function CustomersPage() {
   const navigate = useNavigate();
   const [q, setQ] = useState('');
   const [filter, setFilter] = useState<'' | 'active' | 'inactive' | 'debt'>('active');
-  const [editing, setEditing] = useState<Partial<Customer> | null>(null);
+  const [params, setParams] = useSearchParams();
+  const [editing, setEditing] = useState<Partial<Customer> | null>(() => (params.get('new') === '1' ? emptyCustomer() : null));
   const { data, error, loading, reload } = useAsync(async () => {
     const [customers, balances] = await Promise.all([
       sb().from('customers').select('*').order('name').then(unwrap) as Promise<Customer[]>,
@@ -80,7 +81,7 @@ export default function CustomersPage() {
           { key: 'status', header: '', render: (c) => <div className="flex gap-1">{!c.is_active && <Pill tone="gray">Archivé</Pill>}{c.source === 'website' && <Pill tone="blue">Site</Pill>}</div> },
         ]} />
       </div>
-      {editing && <CustomerForm customer={editing} onClose={() => setEditing(null)} onSaved={(id) => { setEditing(null); void reload(); navigate(`/admin/customers/${id}`); }} />}
+      {editing && <CustomerForm customer={editing} onClose={() => { setEditing(null); if (params.get('new')) setParams({}); }} onSaved={(id) => { setEditing(null); void reload(); navigate(`/admin/customers/${id}`); }} />}
     </>
   );
 }

@@ -11,7 +11,7 @@ export function PartnersSection({ showLink = true }: { showLink?: boolean }) {
   const { partners } = useCatalog();
   const hasReal = partners.some((p) => p.logo_url);
   return (
-    <section aria-labelledby="partners-title" className="bg-mist py-24 sm:py-28">
+    <section aria-labelledby="partners-title" className="section-y bg-mist">
       <div className="container-site">
         <SectionHeading
           id="partners-title"
@@ -20,7 +20,7 @@ export function PartnersSection({ showLink = true }: { showLink?: boolean }) {
           subtitle={hasReal ? undefined : t('partners.subtitle')}
           aside={showLink ? <Link to="/partners" className="btn-link">{t('partners.becomeTitle')} <ArrowRight className="h-4 w-4 rtl:rotate-180" /></Link> : undefined}
         />
-        <Reveal className="mt-14 grid grid-cols-2 gap-px border border-navy/10 bg-navy/10 sm:grid-cols-3 lg:grid-cols-6">
+        <Reveal className="mt-10 grid grid-cols-2 gap-px border border-navy/10 bg-navy/10 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((p, i) => <PartnerLogo key={p.id} partner={p} index={i} />)}
         </Reveal>
       </div>

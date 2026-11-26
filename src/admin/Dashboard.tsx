@@ -40,7 +40,7 @@ export default function Dashboard() {
       <div className="mt-8 grid gap-6 xl:grid-cols-2">
         <Card>
           <div className="flex items-center justify-between border-b border-navy/10 px-6 py-4">
-            <h2 className="font-display font-bold uppercase text-navy">Dernières demandes de devis</h2>
+            <h2 className="font-display font-bold text-navy">Dernières demandes de devis</h2>
             <Link to="/admin/quotes" className="btn-link !text-[11px]">Tout voir <ArrowRight className="h-3.5 w-3.5" /></Link>
           </div>
           <ul className="divide-y divide-navy/10">
@@ -61,7 +61,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <div className="flex items-center justify-between border-b border-navy/10 px-6 py-4">
-            <h2 className="font-display font-bold uppercase text-navy">Derniers messages</h2>
+            <h2 className="font-display font-bold text-navy">Derniers messages</h2>
             <Link to="/admin/messages" className="btn-link !text-[11px]">Tout voir <ArrowRight className="h-3.5 w-3.5" /></Link>
           </div>
           <ul className="divide-y divide-navy/10">

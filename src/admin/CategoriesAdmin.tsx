@@ -30,7 +30,7 @@ export default function CategoriesAdmin() {
             <div className="aspect-[16/9] bg-mist">{c.image_url && <img src={c.image_url} alt="" className="h-full w-full object-cover" loading="lazy" />}</div>
             <div className="flex flex-1 flex-col p-5">
               <p className="text-xs font-semibold text-brand-red">#{c.sort_order} · {counts[c.id] ?? 0} produit(s)</p>
-              <h2 className="mt-1 font-display text-lg font-bold uppercase text-navy">{c.name.fr}</h2>
+              <h2 className="mt-1 font-display text-lg font-bold text-navy">{c.name.fr}</h2>
               <p className="text-sm text-navy/50">{c.name.en} · <span dir="rtl" className="font-arabic">{c.name.ar}</span></p>
               <p className="mt-2 line-clamp-2 flex-1 text-sm text-navy/70">{c.description.fr}</p>
               <div className="mt-4 flex justify-end gap-1 border-t border-navy/10 pt-3">

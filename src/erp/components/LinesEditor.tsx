@@ -57,7 +57,7 @@ export function LinesEditor({ lines, onChange, products, vatRates, readOnly, pri
     return (
       <div className="overflow-x-auto">
         <table className="w-full min-w-[760px] text-sm">
-          <thead className="bg-mist text-[11px] uppercase tracking-wider text-navy/60">
+          <thead className="bg-mist text-[12px] text-navy/60">
             <tr>
               <th className="px-3 py-2.5 text-left">Réf.</th><th className="px-3 py-2.5 text-left">Désignation</th>
               <th className="px-3 py-2.5 text-right">Qté</th>
@@ -95,7 +95,7 @@ export function LinesEditor({ lines, onChange, products, vatRates, readOnly, pri
           return (
             <div key={l.id} className="relative border border-navy/10 bg-white p-3 sm:p-4">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-navy/40">Ligne {i + 1}</span>
+                <span className="text-[12px] font-semibold text-navy/40">Ligne {i + 1}</span>
                 <div className="flex items-center">
                   <button type="button" className="p-1.5 text-navy/40 hover:text-navy disabled:opacity-30" disabled={i === 0} onClick={() => move(i, -1)} aria-label="Monter"><ArrowUp className="h-4 w-4" /></button>
                   <button type="button" className="p-1.5 text-navy/40 hover:text-navy disabled:opacity-30" disabled={i === lines.length - 1} onClick={() => move(i, 1)} aria-label="Descendre"><ArrowDown className="h-4 w-4" /></button>

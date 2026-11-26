@@ -19,7 +19,7 @@ export default function Quote() {
     <>
       <Seo title={t('quote.pageTitle')} description={t('seo.quote.description')} />
       <PageHero label={t('cta.label')} title={t('cta.title')} intro={t('quote.pageIntro')} image={images.quote} crumbs={[{ label: t('quote.pageTitle') }]} />
-      <section className="py-20 sm:py-28">
+      <section className="section-y">
         <div className="container-site grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-8">
             <div className="border border-navy/10 bg-white p-6 shadow-[0_40px_80px_-50px_rgba(10,36,69,0.35)] sm:p-10">
@@ -34,7 +34,7 @@ export default function Quote() {
                 <Reveal as="li" key={title} delay={i * 100} className={`flex gap-5 p-7 ${i === 0 ? 'bg-navy text-white' : 'bg-mist text-navy'}`}>
                   <Icon className={`h-7 w-7 shrink-0 ${i === 0 ? 'text-brand-red' : 'text-navy'}`} strokeWidth={1.3} />
                   <div>
-                    <h3 className="font-display text-lg font-bold uppercase rtl:normal-case">{title}</h3>
+                    <h3 className="font-display text-lg font-bold">{title}</h3>
                     <p className={`mt-2 text-[14.5px] ${i === 0 ? 'text-white/70' : 'text-navy-950/65'}`}>{text}</p>
                   </div>
                 </Reveal>

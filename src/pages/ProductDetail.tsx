@@ -72,9 +72,9 @@ export default function ProductDetail() {
 
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <div className="relative overflow-hidden bg-mist">
+              <div className="chamfer chamfer-lg relative overflow-hidden bg-mist">
                 <Img src={product.image_url} alt={name} priority className="aspect-[4/3] w-full object-cover" />
-                <span className="absolute bottom-4 start-4 bg-white/90 px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.14em] text-navy/60 rtl:normal-case rtl:tracking-normal">
+                <span className="absolute bottom-4 start-4 bg-white/90 px-2.5 py-1 text-[12px] text-navy/60">
                   {t('common.photoPlaceholder')}
                 </span>
               </div>
@@ -82,15 +82,15 @@ export default function ProductDetail() {
 
             <div className="lg:col-span-5">
               {category && <span className="eyebrow">{loc(category.name)}</span>}
-              <h1 className="display-lg mt-5 text-navy">{name}</h1>
-              <p className="mt-5 text-[12px] uppercase tracking-[0.16em] text-navy/50" dir="ltr" style={{ textAlign: 'start' }}>
-                {t('common.reference')} · <span className="font-mono tracking-normal text-navy">{product.reference}</span>
+              <h1 className="display-lg mt-3 text-navy">{name}</h1>
+              <p className="mt-3 text-[13px] text-navy/50" dir="ltr" style={{ textAlign: 'start' }}>
+                {t('common.reference')} <span className="font-semibold text-navy">{product.reference}</span>
               </p>
-              <p className="mt-8 text-[17px] leading-relaxed text-navy-950/70">{loc(product.description)}</p>
+              <p className="mt-5 text-[16px] leading-relaxed text-navy-950/70">{loc(product.description)}</p>
 
               {product.specs.length > 0 && (
-                <div className="mt-10">
-                  <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-navy rtl:text-[13px] rtl:normal-case rtl:tracking-normal">{t('products.specs')}</h2>
+                <div className="mt-8">
+                  <h2 className="text-[15px] font-semibold text-navy">{t('products.specs')}</h2>
                   <dl className="mt-4 divide-y divide-navy/10 border-y border-navy/10">
                     {product.specs.map((s, i) => (
                       <div key={i} className="grid grid-cols-2 gap-4 py-3.5 text-[14.5px]">
@@ -114,7 +114,7 @@ export default function ProductDetail() {
                   <MessageSquare className="h-4 w-4" /> {t('nav.contact')}
                 </Link>
               </div>
-              <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-red rtl:tracking-normal">{t('products.priceOnRequest')}</p>
+              <p className="mt-3 text-[13px] font-semibold text-brand-red">{t('products.priceOnRequest')}</p>
             </div>
           </div>
 
@@ -125,7 +125,7 @@ export default function ProductDetail() {
       </section>
 
       {fallbackRelated.length > 0 && (
-        <section className="bg-mist py-20 sm:py-24" aria-labelledby="related-title">
+        <section className="section-y bg-mist" aria-labelledby="related-title">
           <div className="container-site">
             <h2 id="related-title" className="display-md text-navy">{t('products.related')}</h2>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

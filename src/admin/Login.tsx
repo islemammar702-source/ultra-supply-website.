@@ -61,7 +61,7 @@ export default function Login() {
       <div className="flex flex-col justify-center px-6 py-16 sm:px-16">
         <div className="mx-auto w-full max-w-md">
           <Logo full className="!h-auto w-full max-w-[280px]" />
-          <h1 className="mt-12 font-display text-3xl font-extrabold uppercase text-navy">Connexion</h1>
+          <h1 className="mt-12 font-display text-3xl font-extrabold text-navy">Connexion</h1>
           <p className="mt-2 text-navy/60">Espace réservé au personnel ULTRA SUPPLY.</p>
 
           {api.mode === 'demo' && (

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Eye, Loader2, Pencil, Plus, Search, Star, X } from 'lucide-react';
 import { api, uid } from '@/lib/api';
 import { useCatalog } from '@/hooks/useCatalog';
@@ -34,7 +34,8 @@ export default function ProductsAdmin() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('');
-  const [editing, setEditing] = useState<Product | null>(null);
+  const [params, setParams] = useSearchParams();
+  const [editing, setEditing] = useState<Product | null>(() => (params.get('new') === '1' ? blank() : null));
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
@@ -87,7 +88,7 @@ export default function ProductsAdmin() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[860px] text-left text-sm">
-            <thead className="bg-mist text-[11px] uppercase tracking-wider text-navy/60">
+            <thead className="bg-mist text-[12px] text-navy/60">
               <tr>
                 <th className="px-4 py-3">Produit</th><th className="px-4 py-3">Référence</th><th className="px-4 py-3">Catégorie</th>
                 {showErp && <><th className="px-4 py-3 text-right">Prix HT</th><th className="px-4 py-3 text-right">Stock</th></>}
@@ -129,7 +130,7 @@ export default function ProductsAdmin() {
         </div>
       </Card>
       {editing && (
-        <ProductEditor product={editing} erp={erp.get(editing.id) ?? null} brands={brands} categories={categories} existing={products} onClose={() => setEditing(null)}
+        <ProductEditor product={editing} erp={erp.get(editing.id) ?? null} brands={brands} categories={categories} existing={products} onClose={() => { setEditing(null); if (params.get('new')) setParams({}); }}
           onSaved={async () => { setEditing(null); await Promise.all([load(), refresh()]); }} />
       )}
     </>
