@@ -9,6 +9,7 @@ export const fr = {
   'nav.partners': 'Partenaires',
   'nav.contact': 'Contact',
   'nav.quote': 'Demander un devis',
+  'nav.login': 'Connexion',
   'nav.menu': 'Menu',
   'nav.close': 'Fermer',
   'nav.language': 'Langue',

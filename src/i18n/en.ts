@@ -9,6 +9,7 @@ export const en: Dict = {
   'nav.partners': 'Partners',
   'nav.contact': 'Contact',
   'nav.quote': 'Request a Quote',
+  'nav.login': 'Sign in',
   'nav.menu': 'Menu',
   'nav.close': 'Close',
   'nav.language': 'Language',

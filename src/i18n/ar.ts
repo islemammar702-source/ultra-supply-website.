@@ -9,6 +9,7 @@ export const ar: Dict = {
   'nav.partners': 'الشركاء',
   'nav.contact': 'اتصل بنا',
   'nav.quote': 'اطلب عرض سعر',
+  'nav.login': 'تسجيل الدخول',
   'nav.menu': 'القائمة',
   'nav.close': 'إغلاق',
   'nav.language': 'اللغة',

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Building2, Factory, FileText, Handshake, House, Mail, Menu, Package, Ship, X, type LucideIcon } from 'lucide-react';
+import { ArrowUpRight, Building2, Factory, FileText, Handshake, House, LogIn, Mail, Menu, Package, Ship, X, type LucideIcon } from 'lucide-react';
 import { Logo } from './Logo';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useI18n } from '@/i18n';
@@ -81,6 +81,12 @@ export function Header() {
 
         <div className="flex items-center gap-3 sm:gap-5">
           <LanguageSwitcher tone={overHero ? 'light' : 'dark'} className="hidden sm:flex" />
+          <Link to="/admin/login" title={t('nav.login')}
+            className={`chamfer chamfer-sm flex h-11 items-center gap-2 px-3 text-[14px] font-semibold transition-colors ${overHero ? 'bg-white/10 text-white hover:bg-white hover:text-navy' : 'bg-navy-50 text-navy hover:bg-navy hover:text-white'}`}>
+            <LogIn className="h-4 w-4 rtl:-scale-x-100" />
+            <span className="hidden lg:inline">{t('nav.login')}</span>
+            <span className="sr-only lg:hidden">{t('nav.login')}</span>
+          </Link>
           <Link to="/quote" className="btn btn-red hidden !min-h-[44px] !px-5 md:inline-flex">
             <FileText className="h-4 w-4" />
             {t('nav.quote')}
@@ -128,6 +134,9 @@ export function Header() {
           <div className="mt-8 flex flex-col gap-6">
             <Link to="/quote" className="btn btn-red w-full">
               <FileText className="h-4 w-4" /> {t('nav.quote')} <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
+            </Link>
+            <Link to="/admin/login" className="btn btn-ghost w-full">
+              <LogIn className="h-4 w-4 rtl:-scale-x-100" /> {t('nav.login')}
             </Link>
             <LanguageSwitcher className="justify-center" />
           </div>
